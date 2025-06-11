@@ -14,6 +14,7 @@ namespace Jaltech.App
         {
             InitializeComponent();
             _context = context;
+
         }
 
         private void FormVistaPreviaZona_Load(object sender, EventArgs e)

@@ -73,7 +73,7 @@
             btnVistaPreviaZona.Size = new Size(200, 40);
             btnVistaPreviaZona.TabIndex = 3;
             btnVistaPreviaZona.Text = "Vista Previa Zona";
-            btnVistaPreviaZona.Click += button1_Click;
+            btnVistaPreviaZona.Click += new System.EventHandler(this.btnVistaPrevia_Click);
             // 
             // FormInicio
             // 

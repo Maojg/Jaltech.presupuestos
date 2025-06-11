@@ -29,8 +29,8 @@ namespace Jaltech.App
 
         private void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            var formVista = new FormVistaPreviaZona(_context);
-            formVista.ShowDialog(); // Muestra el formulario de vista previa de zona como un diálogo modal .Show() si quieres mantener ambos abiertos
+            var form = new FormVistaPreviaZona(_context);
+            form.ShowDialog();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -48,9 +48,6 @@ namespace Jaltech.App
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
