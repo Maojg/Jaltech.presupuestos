@@ -9,6 +9,7 @@
 
         private System.Windows.Forms.Button btnPresupuestos;
         private System.Windows.Forms.Button btnReportes;
+        private System.Windows.Forms.Button btnVistaPreviazona;
         private System.Windows.Forms.Button btnSalir;
 
         /// <summary>
@@ -32,42 +33,63 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnPresupuestos = new System.Windows.Forms.Button();
-            this.btnReportes = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            btnPresupuestos = new Button();
+            btnReportes = new Button();
+            btnSalir = new Button();
+            btnVistaPreviaZona = new Button();
+            SuspendLayout();
             // 
             // btnPresupuestos
             // 
-            this.btnPresupuestos.Location = new System.Drawing.Point(100, 30);
-            this.btnPresupuestos.Size = new System.Drawing.Size(200, 40);
-            this.btnPresupuestos.Text = "Cargar Presupuestos";
-            this.btnPresupuestos.Click += new System.EventHandler(this.btnPresupuestos_Click);
+            btnPresupuestos.Location = new Point(25, 34);
+            btnPresupuestos.Name = "btnPresupuestos";
+            btnPresupuestos.Size = new Size(200, 40);
+            btnPresupuestos.TabIndex = 0;
+            btnPresupuestos.Text = "Cargar Presupuestos";
+            btnPresupuestos.Click += btnPresupuestos_Click;
             // 
             // btnReportes
             // 
-            this.btnReportes.Location = new System.Drawing.Point(100, 80);
-            this.btnReportes.Size = new System.Drawing.Size(200, 40);
-            this.btnReportes.Text = "Ver Reportes";
-            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
+            btnReportes.Location = new Point(25, 202);
+            btnReportes.Name = "btnReportes";
+            btnReportes.Size = new Size(200, 40);
+            btnReportes.TabIndex = 1;
+            btnReportes.Text = "Ver Reportes";
+            btnReportes.Click += btnReportes_Click;
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(100, 130);
-            this.btnSalir.Size = new System.Drawing.Size(200, 40);
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            btnSalir.Location = new Point(241, 318);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(200, 40);
+            btnSalir.TabIndex = 2;
+            btnSalir.Text = "Salir";
+            btnSalir.Click += btnSalir_Click;
+            // 
+            // btnVistaPreviaZona
+            // 
+            btnVistaPreviaZona.Location = new Point(25, 113);
+            btnVistaPreviaZona.Name = "btnVistaPreviaZona";
+            btnVistaPreviaZona.Size = new Size(200, 40);
+            btnVistaPreviaZona.TabIndex = 3;
+            btnVistaPreviaZona.Text = "Vista Previa Zona";
+            btnVistaPreviaZona.Click += button1_Click;
             // 
             // FormInicio
             // 
-            this.ClientSize = new System.Drawing.Size(400, 200);
-            this.Controls.Add(this.btnPresupuestos);
-            this.Controls.Add(this.btnReportes);
-            this.Controls.Add(this.btnSalir);
-            this.Text = "Inicio - Jaltech Budget App";
-            this.ResumeLayout(false);
+            ClientSize = new Size(678, 370);
+            Controls.Add(btnVistaPreviaZona);
+            Controls.Add(btnPresupuestos);
+            Controls.Add(btnReportes);
+            Controls.Add(btnSalir);
+            Name = "FormInicio";
+            Text = "Inicio - Jaltech Budget App";
+            Load += FormInicio_Load;
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnVistaPreviaZona;
     }
 }

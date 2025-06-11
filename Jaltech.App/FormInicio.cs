@@ -27,6 +27,12 @@ namespace Jaltech.App
             form.ShowDialog(); // Muestra el formulario de presupuestos como un diálogo modalo .Show() si quieres mantener ambos abiertos
         }
 
+        private void btnVistaPrevia_Click(object sender, EventArgs e)
+        {
+            var formVista = new FormVistaPreviaZona(_context);
+            formVista.ShowDialog(); // Muestra el formulario de vista previa de zona como un diálogo modal .Show() si quieres mantener ambos abiertos
+        }
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit(); // Cierra la aplicación
@@ -35,6 +41,16 @@ namespace Jaltech.App
         private void btnReportes_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Funcionalidad de reportes en construcción.", "Jaltech Budget App");
+        }
+
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

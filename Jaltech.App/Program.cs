@@ -25,7 +25,8 @@ namespace Jaltech.App
 
                     services.AddScoped<FormInicio>(); // Registrar el formulario de inicio
                     services.AddScoped<FormPresupuestos>(); // Aquí puedes registrar otros formularios por módulo.
-                    
+                    services.AddScoped<FormVistaPreviaZona>(); // Registrar el formulario de vista previa de zona
+
                 });
 
             var app = builder.Build();

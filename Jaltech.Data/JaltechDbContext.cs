@@ -13,5 +13,14 @@ namespace Jaltech.Data
         public JaltechDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<PresupuestoZonal> PresupuestosZonales { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<PresupuestoZonal>()
+                .ToTable("DimPresupuestoZonal");
+        }
     }
+
 }

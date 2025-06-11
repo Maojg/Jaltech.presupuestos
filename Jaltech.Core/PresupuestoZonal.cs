@@ -62,4 +62,24 @@ namespace Jaltech.Core
         [DisplayName("Fecha Carga")]
         public DateTime FechaCarga { get; set; } = DateTime.Now;
     }
+
+    public class VistaPreviaZona
+    {
+        public string Zona { get; set; } = string.Empty;
+        public int Anio { get; set; }
+        public int Mes { get; set; }
+        public decimal SalarioBasico { get; set; }
+        public decimal Prestacional { get; set; }
+        public decimal PromedioComisiones { get; set; }
+        public decimal SalarioPromedioTotal => SalarioBasico + Prestacional + PromedioComisiones;
+        public decimal BonoCumplVentas { get; set; }
+        public decimal BonoBasik { get; set; }
+        public decimal BonoCelulares { get; set; }
+        public decimal BonoBod { get; set; }
+        public decimal BonoDulces { get; set; }
+        public int ClientesActivos { get; set; }
+        public decimal KPIReguladores { get; set; }
+        public decimal TotalBonosMes => BonoCumplVentas + BonoBasik + BonoCelulares + BonoBod + BonoDulces + ClientesActivos + KPIReguladores;
+        public decimal TotalSalario => SalarioPromedioTotal + TotalBonosMes;
+    }
 }

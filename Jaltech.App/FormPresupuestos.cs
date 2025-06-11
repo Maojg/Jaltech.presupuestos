@@ -131,30 +131,36 @@ namespace Jaltech.App
             {
                 try
                 {
-                    // Obtener combinaciones únicas de Zona, Mes y Año
-                    var zonasMesesAnios = listaPresupuestos
-                        .Select(p => new { p.Zona, p.Mes, p.Anio })
-                        .ToList();
+                    foreach (var nuevoRegistro in listaPresupuestos)
+                    {
+                        // Buscar si ya existe uno con la misma zona, mes y año
+                        var existente = _context.PresupuestosZonales
+                            .FirstOrDefault(x => x.Zona == nuevoRegistro.Zona &&
+                                                 x.Mes == nuevoRegistro.Mes &&
+                                                 x.Anio == nuevoRegistro.Anio);
 
-                    // Buscar registros existentes en la base de datos con esas combinaciones
-                    var registrosExistentes = _context.PresupuestosZonales
-                        .Where(p => zonasMesesAnios
-                            .Any(lp => lp.Zona == p.Zona && lp.Mes == p.Mes && lp.Anio == p.Anio))
-                        .ToList();
+                        if (existente != null)
+                        {
+                            // Si existe, actualizar los valores
+                            _context.Entry(existente).CurrentValues.SetValues(nuevoRegistro);
+                        }
+                        else
+                        {
+                            // Si no existe, agregar
+                            _context.PresupuestosZonales.Add(nuevoRegistro);
+                        }
+                    }
 
-                    // Eliminar los existentes
-                    if (registrosExistentes.Any())
-                        _context.PresupuestosZonales.RemoveRange(registrosExistentes);
-
-                    // Agregar los nuevos
-                    _context.PresupuestosZonales.AddRange(listaPresupuestos);
                     _context.SaveChanges();
-
-                    MessageBox.Show("Los registros fueron actualizados exitosamente.", "Confirmación");
+                    MessageBox.Show("Los presupuestos fueron guardados exitosamente en la base de datos.", "Confirmación");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al guardar en la base de datos: {ex.Message}", "Error");
+                    MessageBox.Show(
+                        "Hubo un error al guardar los datos. Verifica que no existan registros duplicados (Zona + Año + Mes) o problemas de conexión con la base de datos.\n\nDetalle técnico:\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
             else
@@ -186,6 +192,11 @@ namespace Jaltech.App
         }
 
         private void FormPresupuestos_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvPresupuestos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

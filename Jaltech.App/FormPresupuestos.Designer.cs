@@ -34,57 +34,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCargarExcel = new System.Windows.Forms.Button();
-            this.btnGuardarBD = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.dgvPresupuestos = new System.Windows.Forms.DataGridView();
-
-            this.SuspendLayout();
-
+            tableLayoutPanel = new TableLayoutPanel();
+            btnCargarExcel = new Button();
+            btnGuardarBD = new Button();
+            btnEliminar = new Button();
+            dgvPresupuestos = new DataGridView();
+            tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPresupuestos).BeginInit();
+            SuspendLayout();
+            // 
             // tableLayoutPanel
-            this.tableLayoutPanel.ColumnCount = 3;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel.Height = 50;
-
+            // 
+            tableLayoutPanel.ColumnCount = 3;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
+            tableLayoutPanel.Controls.Add(btnCargarExcel, 0, 0);
+            tableLayoutPanel.Controls.Add(btnGuardarBD, 1, 0);
+            tableLayoutPanel.Controls.Add(btnEliminar, 2, 0);
+            tableLayoutPanel.Dock = DockStyle.Top;
+            tableLayoutPanel.Location = new Point(0, 0);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel.Size = new Size(1000, 50);
+            tableLayoutPanel.TabIndex = 1;
+            // 
             // btnCargarExcel
-            this.btnCargarExcel.Text = "Cargar Excel";
-            this.btnCargarExcel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCargarExcel.Click += new System.EventHandler(this.btnCargarExcel_Click);
-
+            // 
+            btnCargarExcel.Dock = DockStyle.Fill;
+            btnCargarExcel.Location = new Point(3, 3);
+            btnCargarExcel.Name = "btnCargarExcel";
+            btnCargarExcel.Size = new Size(324, 44);
+            btnCargarExcel.TabIndex = 0;
+            btnCargarExcel.Text = "Cargar Excel";
+            btnCargarExcel.Click += btnCargarExcel_Click;
+            // 
             // btnGuardarBD
-            this.btnGuardarBD.Text = "Guardar en BD";
-            this.btnGuardarBD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnGuardarBD.Click += new System.EventHandler(this.btnGuardarBD_Click);
-
+            // 
+            btnGuardarBD.Dock = DockStyle.Fill;
+            btnGuardarBD.Location = new Point(333, 3);
+            btnGuardarBD.Name = "btnGuardarBD";
+            btnGuardarBD.Size = new Size(324, 44);
+            btnGuardarBD.TabIndex = 1;
+            btnGuardarBD.Text = "Guardar en BD";
+            btnGuardarBD.Click += btnGuardarBD_Click;
+            // 
             // btnEliminar
-            this.btnEliminar.Text = "Eliminar Selección";
-            this.btnEliminar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-
-            // Agregar botones al panel
-            this.tableLayoutPanel.Controls.Add(this.btnCargarExcel, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.btnGuardarBD, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.btnEliminar, 2, 0);
-
+            // 
+            btnEliminar.Dock = DockStyle.Fill;
+            btnEliminar.Location = new Point(663, 3);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(334, 44);
+            btnEliminar.TabIndex = 2;
+            btnEliminar.Text = "Eliminar Selección";
+            btnEliminar.Click += btnEliminar_Click;
+            // 
             // dgvPresupuestos
-            this.dgvPresupuestos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPresupuestos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
-            this.dgvPresupuestos.AllowUserToAddRows = false;
-            this.dgvPresupuestos.AllowUserToDeleteRows = true;
-            this.dgvPresupuestos.ReadOnly = false;
-            this.dgvPresupuestos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
+            // 
+            dgvPresupuestos.AllowUserToAddRows = false;
+            dgvPresupuestos.Dock = DockStyle.Fill;
+            dgvPresupuestos.Location = new Point(0, 50);
+            dgvPresupuestos.Name = "dgvPresupuestos";
+            dgvPresupuestos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPresupuestos.Size = new Size(1000, 550);
+            dgvPresupuestos.TabIndex = 0;
+            dgvPresupuestos.CellContentClick += dgvPresupuestos_CellContentClick;
+            // 
             // FormPresupuestos
-            this.ClientSize = new System.Drawing.Size(1000, 600);
-            this.Controls.Add(this.dgvPresupuestos);
-            this.Controls.Add(this.tableLayoutPanel);
-            this.Text = "Gestión de Presupuestos Zonales";
-
-            this.ResumeLayout(false);
+            // 
+            ClientSize = new Size(1000, 600);
+            Controls.Add(dgvPresupuestos);
+            Controls.Add(tableLayoutPanel);
+            Name = "FormPresupuestos";
+            Text = "Gestión de Presupuestos Zonales";
+            tableLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPresupuestos).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
