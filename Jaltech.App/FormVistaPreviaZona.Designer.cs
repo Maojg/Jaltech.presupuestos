@@ -1,6 +1,5 @@
 ﻿namespace Jaltech.App
 {
-   
     partial class FormVistaPreviaZona
     {
         private System.ComponentModel.IContainer components = null;
@@ -34,6 +33,7 @@
             this.cbZonas = new System.Windows.Forms.ComboBox();
             this.cbMes = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+
             this.lblZona = new System.Windows.Forms.Label();
             this.lblSalarioBasico = new System.Windows.Forms.Label();
             this.lblPrestacional = new System.Windows.Forms.Label();
@@ -48,8 +48,6 @@
             this.lblKPI = new System.Windows.Forms.Label();
             this.lblTotalBonos = new System.Windows.Forms.Label();
             this.lblTotalGanado = new System.Windows.Forms.Label();
-            this.cbMes.SelectedIndexChanged += new System.EventHandler(this.cbMes_SelectedIndexChanged);
-
 
             // Formulario
             this.Text = "Vista Previa de Presupuesto por Zona";
@@ -58,11 +56,6 @@
 
             // ComboBox Mes
             this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Items.AddRange(new object[] {
-                "1 - Enero", "2 - Febrero", "3 - Marzo", "4 - Abril", "5 - Mayo", "6 - Junio",
-                "7 - Julio", "8 - Agosto", "9 - Septiembre", "10 - Octubre", "11 - Noviembre", "12 - Diciembre"
-            });
-            this.cbMes.SelectedIndex = DateTime.Now.Month - 1;
             this.cbMes.Location = new System.Drawing.Point(340, 20);
             this.cbMes.Width = 150;
             this.cbMes.SelectedIndexChanged += new System.EventHandler(this.cbMes_SelectedIndexChanged);
@@ -124,6 +117,9 @@
             }
 
             this.Controls.Add(this.tableLayoutPanel);
+
+            // 🔗 Enlazar el evento Load manualmente
+            this.Load += new System.EventHandler(this.FormVistaPreviaZona_Load);
         }
     }
 }
