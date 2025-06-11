@@ -12,6 +12,7 @@
         private System.Windows.Forms.Button btnGuardarBD;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvPresupuestos;
+        private System.Windows.Forms.ComboBox cbMes;
 
         /// <summary>
         /// Clean up any resources being used.

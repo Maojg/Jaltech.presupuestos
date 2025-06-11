@@ -82,4 +82,10 @@ namespace Jaltech.Core
         public decimal TotalBonosMes => BonoCumplVentas + BonoBasik + BonoCelulares + BonoBod + BonoDulces + ClientesActivos + KPIReguladores;
         public decimal TotalSalario => SalarioPromedioTotal + TotalBonosMes;
     }
+    public class ZonaDto
+    {
+        public string Zona { get; set; } = string.Empty;
+    }
+
+
 }

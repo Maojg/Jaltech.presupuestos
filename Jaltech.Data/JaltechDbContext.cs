@@ -13,6 +13,7 @@ namespace Jaltech.Data
         public JaltechDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<PresupuestoZonal> PresupuestosZonales { get; set; }
+        public DbSet<ZonaDto> Zonas { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,7 @@ namespace Jaltech.Data
 
             modelBuilder.Entity<PresupuestoZonal>()
                 .ToTable("DimPresupuestoZonal");
+            modelBuilder.Entity<ZonaDto>().HasNoKey();
         }
     }
 
