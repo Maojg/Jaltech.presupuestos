@@ -19,8 +19,25 @@ namespace Jaltech.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<PresupuestoZonal>()
-                .ToTable("DimPresupuestoZonal");
+            modelBuilder.Entity<PresupuestoZonal>(entity =>
+            {
+                entity.ToTable("DimPresupuestoZonal");
+
+                // Establecer precisión y escala explícita para todos los decimal
+                entity.Property(p => p.SalarioBasico).HasPrecision(18, 2);
+                entity.Property(p => p.Prestacional).HasPrecision(18, 2);
+                entity.Property(p => p.PromedioComisiones).HasPrecision(18, 2);
+                entity.Property(p => p.SalarioPromedioTotal).HasPrecision(18, 2);
+                entity.Property(p => p.BonoCumplVentas).HasPrecision(18, 2);
+                entity.Property(p => p.BonoBasik).HasPrecision(18, 2);
+                entity.Property(p => p.BonoCelulares).HasPrecision(18, 2);
+                entity.Property(p => p.BonoBod).HasPrecision(18, 2);
+                entity.Property(p => p.BonoDulces).HasPrecision(18, 2);
+                entity.Property(p => p.KPIReguladores).HasPrecision(18, 2);
+                entity.Property(p => p.TotalBonosMes).HasPrecision(18, 2);
+                entity.Property(p => p.TotalSalario).HasPrecision(18, 2);
+            });
+
             modelBuilder.Entity<ZonaDto>().HasNoKey();
         }
     }

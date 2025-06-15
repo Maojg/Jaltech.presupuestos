@@ -34,6 +34,7 @@
             this.cbMes = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 
+            // Instanciar explícitamente cada label de resultado
             this.lblZona = new System.Windows.Forms.Label();
             this.lblSalarioBasico = new System.Windows.Forms.Label();
             this.lblPrestacional = new System.Windows.Forms.Label();
@@ -85,10 +86,23 @@
                 "Clientes Activos", "KPI Temporada", "Total Bonos", "Ganarian Total Salario"
             };
 
-            Label[] valores = {
-                lblZona, lblSalarioBasico, lblPrestacional, lblComisiones, lblSalarioTotal,
-                lblBonoCumpl, lblBonoBasik, lblBonoCelulares, lblBonoBod, lblBonoDulces,
-                lblClientes, lblKPI, lblTotalBonos, lblTotalGanado
+            // Crear arreglo de labels de resultado, ya instanciados
+            Label[] etiquetasControl = new Label[]
+            {
+                lblZona,
+                lblSalarioBasico,
+                lblPrestacional,
+                lblComisiones,
+                lblSalarioTotal,
+                lblBonoCumpl,
+                lblBonoBasik,
+                lblBonoCelulares,
+                lblBonoBod,
+                lblBonoDulces,
+                lblClientes,
+                lblKPI,
+                lblTotalBonos,
+                lblTotalGanado
             };
 
             for (int i = 0; i < etiquetas.Length; i++)
@@ -102,18 +116,15 @@
                     TextAlign = System.Drawing.ContentAlignment.MiddleLeft
                 };
 
-                valores[i] = new Label
-                {
-                    Text = "-",
-                    Font = new System.Drawing.Font("Segoe UI", 9F),
-                    AutoSize = true,
-                    Dock = System.Windows.Forms.DockStyle.Fill,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleRight,
-                    ForeColor = System.Drawing.Color.Navy
-                };
+                etiquetasControl[i].Text = "-";
+                etiquetasControl[i].Font = new System.Drawing.Font("Segoe UI", 9F);
+                etiquetasControl[i].AutoSize = true;
+                etiquetasControl[i].Dock = System.Windows.Forms.DockStyle.Fill;
+                etiquetasControl[i].TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+                etiquetasControl[i].ForeColor = System.Drawing.Color.Navy;
 
                 this.tableLayoutPanel.Controls.Add(label, 0, i);
-                this.tableLayoutPanel.Controls.Add(valores[i], 1, i);
+                this.tableLayoutPanel.Controls.Add(etiquetasControl[i], 1, i);
             }
 
             this.Controls.Add(this.tableLayoutPanel);

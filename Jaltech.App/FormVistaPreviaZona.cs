@@ -24,7 +24,6 @@ namespace Jaltech.App
                 cbMes.SelectedIndexChanged -= cbMes_SelectedIndexChanged;
                 cbZonas.SelectedIndexChanged -= cbZonas_SelectedIndexChanged;
 
-                // Cargar meses
                 cbMes.DataSource = Enumerable.Range(1, 12)
                     .Select(m => new
                     {
@@ -36,11 +35,10 @@ namespace Jaltech.App
                 cbMes.ValueMember = "Value";
                 cbMes.SelectedValue = DateTime.Now.Month;
 
-                // Cargar zonas
                 var zonas = _context.Zonas
-                    .FromSqlRaw("SELECT LTRIM(RTRIM(Sector)) AS Zona FROM DimSectorEconomico")
-                    .AsEnumerable()
-                    .Select(z => new ZonaDto { Zona = z.Zona })
+                    .FromSqlRaw("SELECT LTRIM(RTRIM(Zona)) AS Zona FROM DimPresupuestoZonal")
+                    .AsNoTracking()
+                    .Select(z => new ZonaDto { Zona = z.Zona.Trim() })
                     .Distinct()
                     .OrderBy(z => z.Zona)
                     .ToList();
@@ -49,18 +47,15 @@ namespace Jaltech.App
                 cbZonas.DisplayMember = "Zona";
                 cbZonas.ValueMember = "Zona";
 
-                // Seleccionar '01' por defecto
-                var index = zonas.FindIndex(z => z.Zona == "01");
+                int index = zonas.FindIndex(z => z.Zona == "01");
                 if (index >= 0)
                 {
                     cbZonas.SelectedIndex = index;
                 }
 
-                // Reasignar eventos
                 cbMes.SelectedIndexChanged += cbMes_SelectedIndexChanged;
                 cbZonas.SelectedIndexChanged += cbZonas_SelectedIndexChanged;
 
-                // Cargar datos una vez todo esté listo
                 MostrarDatosZonaYMes();
             }
             catch (Exception ex)
@@ -69,38 +64,38 @@ namespace Jaltech.App
             }
         }
 
+        private void cbMes_SelectedIndexChanged(object sender, EventArgs e) => MostrarDatosZonaYMes();
 
-        private void cbMes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MostrarDatosZonaYMes();
-        }
-
-        private void cbZonas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MostrarDatosZonaYMes();
-        }
+        private void cbZonas_SelectedIndexChanged(object sender, EventArgs e) => MostrarDatosZonaYMes();
 
         private void MostrarDatosZonaYMes()
         {
-            if (cbZonas.SelectedItem == null || cbMes.SelectedValue == null)
-                return;
-
-            string zona = ((ZonaDto)cbZonas.SelectedItem).Zona;
-            int mes = (int)cbMes.SelectedValue;
-            int anio = DateTime.Now.Year;
-
-            // Mostrar parámetros para validación
-            MessageBox.Show($"Zona seleccionada (raw): '{zona}'", "Debug Zona");
-
             try
             {
-                var dato = _context.PresupuestosZonales
-                    .AsEnumerable()  // fuerza evaluación en memoria
-                    .FirstOrDefault(p => p.Zona.Trim() == zona.Trim() && p.Mes == mes && p.Anio == anio);
+                if (cbZonas.SelectedValue == null || cbMes.SelectedValue == null)
+                    return;
 
+                string zonaSeleccionada = cbZonas.SelectedValue.ToString().Trim();
+                int mes = (int)cbMes.SelectedValue;
+                int anio = DateTime.Now.Year;
+
+                Console.WriteLine($"🔍 Zona seleccionada: '{zonaSeleccionada}' (Len={zonaSeleccionada.Length})");
+                Console.WriteLine($"📅 Mes: {mes}, Año: {anio}");
+
+                var dato = _context.PresupuestosZonales
+                    .FromSqlInterpolated($@"
+                        SELECT TOP 1 *
+                        FROM DimPresupuestoZonal
+                        WHERE LTRIM(RTRIM(Zona)) = {zonaSeleccionada}
+                        AND Mes = {mes}
+                        AND Anio = {anio}")
+                    .AsNoTracking()
+                    .FirstOrDefault();
 
                 if (dato != null)
                 {
+                    lblZona.Text = zonaSeleccionada;
+                    Console.WriteLine("✅ Registro encontrado.");
                     lblSalarioBasico.Text = dato.SalarioBasico.ToString("N0");
                     lblPrestacional.Text = dato.Prestacional.ToString("N0");
                     lblComisiones.Text = dato.PromedioComisiones.ToString("N0");
@@ -117,12 +112,14 @@ namespace Jaltech.App
                 }
                 else
                 {
+                    Console.WriteLine("⚠️ No se encontraron datos.");
                     LimpiarCampos();
                     MessageBox.Show("No se encontraron datos para esta combinación de Zona y Mes.", "Sin datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"❌ Error: {ex.Message}");
                 LimpiarCampos();
                 MessageBox.Show($"Error al buscar datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -135,6 +132,5 @@ namespace Jaltech.App
             lblBonoBod.Text = lblBonoDulces.Text = lblClientes.Text = lblKPI.Text =
             lblTotalBonos.Text = lblTotalGanado.Text = "-";
         }
-
     }
 }
