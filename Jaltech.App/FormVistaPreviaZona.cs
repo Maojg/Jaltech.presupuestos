@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
 using Jaltech.Data;
 using Microsoft.EntityFrameworkCore;
 using Jaltech.Core;
@@ -15,6 +16,19 @@ namespace Jaltech.App
         {
             InitializeComponent();
             _context = context;
+
+            // 2. Estilo para botones principales (si tienes botones)
+            // EstilizarBoton(btnCargar, Color.FromArgb(0, 102, 204));
+            // EstilizarBoton(btnCerrar, Color.FromArgb(204, 0, 0));
+
+            // 3. Estilizar DataGridView si tienes alguno, por ejemplo dgvVistaPrevia
+            // dgvVistaPrevia.EnableHeadersVisualStyles = false;
+            // dgvVistaPrevia.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 51, 102);
+            // dgvVistaPrevia.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            // dgvVistaPrevia.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            // dgvVistaPrevia.DefaultCellStyle.Font = new Font("Segoe UI", 9);
+            // dgvVistaPrevia.RowTemplate.Height = 28;
+            // dgvVistaPrevia.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
         }
 
         private void FormVistaPreviaZona_Load(object sender, EventArgs e)
@@ -107,6 +121,8 @@ namespace Jaltech.App
                     lblBonoDulces.Text = dato.BonoDulces.ToString("N0");
                     lblClientes.Text = dato.ClientesActivos.ToString("N0");
                     lblKPI.Text = dato.KPIReguladores.ToString("N0");
+                    lblEspecial1.Text = dato.BonoEspecial1.ToString("N0");
+                    lblEspecial2.Text = dato.BonoEspecial2.ToString("N0");
                     lblTotalBonos.Text = dato.TotalBonosMes.ToString("N0");
                     lblTotalGanado.Text = dato.TotalSalario.ToString("N0");
                 }
@@ -129,8 +145,18 @@ namespace Jaltech.App
         {
             lblSalarioBasico.Text = lblPrestacional.Text = lblComisiones.Text =
             lblSalarioTotal.Text = lblBonoCumpl.Text = lblBonoBasik.Text = lblBonoCelulares.Text =
-            lblBonoBod.Text = lblBonoDulces.Text = lblClientes.Text = lblKPI.Text =
+            lblBonoBod.Text = lblBonoDulces.Text = lblClientes.Text = lblKPI.Text = lblEspecial1.Text = lblEspecial2.Text =
             lblTotalBonos.Text = lblTotalGanado.Text = "-";
+        }
+
+        // ...agrega el método de utilidad para estilizar botones si tienes botones...
+        private void EstilizarBoton(Button boton, Color fondo, bool bold = false)
+        {
+            boton.BackColor = fondo;
+            boton.FlatStyle = FlatStyle.Flat;
+            boton.FlatAppearance.BorderSize = 0;
+            boton.ForeColor = Color.White;
+            boton.Font = new Font("Segoe UI", 10, bold ? FontStyle.Bold : FontStyle.Regular);
         }
     }
 }

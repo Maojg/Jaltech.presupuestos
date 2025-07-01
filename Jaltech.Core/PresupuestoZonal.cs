@@ -48,10 +48,16 @@ namespace Jaltech.Core
         public decimal BonoDulces { get; set; }
 
         [DisplayName("Clientes Activos")]
-        public int ClientesActivos { get; set; }
+        public decimal ClientesActivos { get; set; }
 
         [DisplayName("KPI Temporada")]
         public decimal KPIReguladores { get; set; }
+
+        [DisplayName("Bono Especial 1")]
+        public decimal BonoEspecial1 { get; set; }
+
+        [DisplayName("Bono Especial 2")]
+        public decimal BonoEspecial2 { get; set; }
 
         [DisplayName("Total Bonos Mes")]
         public decimal TotalBonosMes { get; set; }
@@ -77,9 +83,13 @@ namespace Jaltech.Core
         public decimal BonoCelulares { get; set; }
         public decimal BonoBod { get; set; }
         public decimal BonoDulces { get; set; }
-        public int ClientesActivos { get; set; }
+        public decimal ClientesActivos { get; set; }
         public decimal KPIReguladores { get; set; }
-        public decimal TotalBonosMes => BonoCumplVentas + BonoBasik + BonoCelulares + BonoBod + BonoDulces + ClientesActivos + KPIReguladores;
+        public decimal BonoEspecial1 { get; set; }
+        public decimal BonoEspecial2 { get; set; }
+
+
+        public decimal TotalBonosMes => BonoCumplVentas + BonoBasik + BonoCelulares + BonoBod + BonoDulces + ClientesActivos + KPIReguladores + BonoEspecial1 + BonoEspecial2;
         public decimal TotalSalario => SalarioPromedioTotal + TotalBonosMes;
     }
     public class ZonaDto

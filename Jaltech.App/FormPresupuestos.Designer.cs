@@ -13,6 +13,11 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvPresupuestos;
         private System.Windows.Forms.ComboBox cbMes;
+        private System.Windows.Forms.ComboBox cbAnio;
+        private System.Windows.Forms.ComboBox cbZona;
+        private System.Windows.Forms.Button btnCargarBD;
+        private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.Label lblTitulo;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,87 +35,101 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+
+            // Crear controles
             tableLayoutPanel = new TableLayoutPanel();
             btnCargarExcel = new Button();
             btnGuardarBD = new Button();
             btnEliminar = new Button();
             dgvPresupuestos = new DataGridView();
-            tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPresupuestos).BeginInit();
-            SuspendLayout();
-            // 
-            // tableLayoutPanel
-            // 
-            tableLayoutPanel.ColumnCount = 3;
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34F));
-            tableLayoutPanel.Controls.Add(btnCargarExcel, 0, 0);
-            tableLayoutPanel.Controls.Add(btnGuardarBD, 1, 0);
-            tableLayoutPanel.Controls.Add(btnEliminar, 2, 0);
+            cbAnio = new ComboBox();
+            cbZona = new ComboBox();
+            btnCargarBD = new Button();
+            headerPanel = new Panel();
+            lblTitulo = new Label();
+
+            // ========== PANEL DEL TÍTULO ==========
+            headerPanel.Dock = DockStyle.Top;
+            headerPanel.Height = 50;
+            headerPanel.BackColor = Color.FromArgb(0, 51, 102);
+
+            lblTitulo.Text = "Gestión de Presupuestos Zonales";
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitulo.AutoSize = true;
+            lblTitulo.Location = new Point(10, 10);
+            headerPanel.Controls.Add(lblTitulo);
+
+            // ========== PANEL DE BOTONES Y FILTROS ==========
+            tableLayoutPanel.ColumnCount = 6;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16F));
             tableLayoutPanel.Dock = DockStyle.Top;
-            tableLayoutPanel.Location = new Point(0, 0);
-            tableLayoutPanel.Name = "tableLayoutPanel";
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel.Size = new Size(1000, 50);
-            tableLayoutPanel.TabIndex = 1;
-            // 
-            // btnCargarExcel
-            // 
+            tableLayoutPanel.Height = 50;
+            tableLayoutPanel.Padding = new Padding(5);
+
+            // Botón Cargar Excel
             btnCargarExcel.Dock = DockStyle.Fill;
-            btnCargarExcel.Location = new Point(3, 3);
-            btnCargarExcel.Name = "btnCargarExcel";
-            btnCargarExcel.Size = new Size(324, 44);
-            btnCargarExcel.TabIndex = 0;
             btnCargarExcel.Text = "Cargar Excel";
             btnCargarExcel.Click += btnCargarExcel_Click;
-            // 
-            // btnGuardarBD
-            // 
+            tableLayoutPanel.Controls.Add(btnCargarExcel, 0, 0);
+
+            // Botón Guardar en BD
             btnGuardarBD.Dock = DockStyle.Fill;
-            btnGuardarBD.Location = new Point(333, 3);
-            btnGuardarBD.Name = "btnGuardarBD";
-            btnGuardarBD.Size = new Size(324, 44);
-            btnGuardarBD.TabIndex = 1;
             btnGuardarBD.Text = "Guardar en BD";
             btnGuardarBD.Click += btnGuardarBD_Click;
-            // 
-            // btnEliminar
-            // 
+            tableLayoutPanel.Controls.Add(btnGuardarBD, 1, 0);
+
+            // Botón Eliminar Selección
             btnEliminar.Dock = DockStyle.Fill;
-            btnEliminar.Location = new Point(663, 3);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(334, 44);
-            btnEliminar.TabIndex = 2;
             btnEliminar.Text = "Eliminar Selección";
             btnEliminar.Click += btnEliminar_Click;
-            // 
-            // dgvPresupuestos
-            // 
-            dgvPresupuestos.AllowUserToAddRows = false;
+            tableLayoutPanel.Controls.Add(btnEliminar, 2, 0);
+
+            // Combo Año
+            cbAnio.Dock = DockStyle.Fill;
+            cbAnio.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAnio.Items.AddRange(new object[] { "", "2023", "2024", "2025", "2026" });
+            cbAnio.Font = new Font("Segoe UI", 10F);
+            tableLayoutPanel.Controls.Add(cbAnio, 3, 0);
+
+            // Combo Zona
+            cbZona.Dock = DockStyle.Fill;
+            cbZona.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbZona.Items.Add("");
+            cbZona.Items.AddRange(Enumerable.Range(1, 65).Select(x => x.ToString("D2")).ToArray());
+            cbZona.Font = new Font("Segoe UI", 10F);
+            tableLayoutPanel.Controls.Add(cbZona, 4, 0);
+
+            // Botón Cargar desde BD
+            btnCargarBD.Dock = DockStyle.Fill;
+            btnCargarBD.Text = "Cargar desde BD";
+            tableLayoutPanel.Controls.Add(btnCargarBD, 5, 0);
+
+            // ========== GRID ==========
             dgvPresupuestos.Dock = DockStyle.Fill;
-            dgvPresupuestos.Location = new Point(0, 50);
-            dgvPresupuestos.Name = "dgvPresupuestos";
+            dgvPresupuestos.AllowUserToAddRows = false;
             dgvPresupuestos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPresupuestos.Size = new Size(1000, 550);
-            dgvPresupuestos.TabIndex = 0;
             dgvPresupuestos.CellContentClick += dgvPresupuestos_CellContentClick;
-            // 
-            // FormPresupuestos
-            // 
+
+            // ========== FORMULARIO ==========
             ClientSize = new Size(1000, 600);
-            Controls.Add(dgvPresupuestos);
-            Controls.Add(tableLayoutPanel);
             Name = "FormPresupuestos";
             Text = "Gestión de Presupuestos Zonales";
-            tableLayoutPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvPresupuestos).EndInit();
-            ResumeLayout(false);
+
+            // Orden de agregado CRÍTICO
+            Controls.Add(dgvPresupuestos);     // Primero el grid (ocupará el resto del espacio)
+            Controls.Add(tableLayoutPanel);    // Luego panel de botones
+            Controls.Add(headerPanel);         // Luego el encabezado
         }
 
         #endregion

@@ -18,8 +18,12 @@
         private System.Windows.Forms.Label lblBonoDulces;
         private System.Windows.Forms.Label lblClientes;
         private System.Windows.Forms.Label lblKPI;
+        private System.Windows.Forms.Label lblEspecial1;
+        private System.Windows.Forms.Label lblEspecial2;
         private System.Windows.Forms.Label lblTotalBonos;
         private System.Windows.Forms.Label lblTotalGanado;
+        private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.Label lblTitulo;
 
         protected override void Dispose(bool disposing)
         {
@@ -47,6 +51,8 @@
             this.lblBonoDulces = new System.Windows.Forms.Label();
             this.lblClientes = new System.Windows.Forms.Label();
             this.lblKPI = new System.Windows.Forms.Label();
+            this.lblEspecial1 = new System.Windows.Forms.Label();
+            this.lblEspecial2 = new System.Windows.Forms.Label();
             this.lblTotalBonos = new System.Windows.Forms.Label();
             this.lblTotalGanado = new System.Windows.Forms.Label();
 
@@ -55,25 +61,43 @@
             this.ClientSize = new System.Drawing.Size(600, 500);
             this.BackColor = System.Drawing.Color.WhiteSmoke;
 
+            // 1. Encabezado tipo banner azul (Panel superior)
+            headerPanel = new System.Windows.Forms.Panel();
+            headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            headerPanel.Height = 50;
+            headerPanel.BackColor = System.Drawing.Color.FromArgb(0, 51, 102);
+
+            lblTitulo = new System.Windows.Forms.Label();
+            lblTitulo.Text = "Vista Previa de Presupuesto por Zona";
+            lblTitulo.ForeColor = System.Drawing.Color.White;
+            lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            lblTitulo.AutoSize = true;
+            lblTitulo.Location = new System.Drawing.Point(10, 10);
+            headerPanel.Controls.Add(lblTitulo);
+
+            this.Controls.Add(headerPanel);
+
             // ComboBox Mes
             this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Location = new System.Drawing.Point(340, 20);
+            this.cbMes.Location = new System.Drawing.Point(340, 60);
             this.cbMes.Width = 150;
+            this.cbMes.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbMes.SelectedIndexChanged += new System.EventHandler(this.cbMes_SelectedIndexChanged);
             this.Controls.Add(this.cbMes);
 
             // ComboBox Zonas
             this.cbZonas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbZonas.Location = new System.Drawing.Point(20, 20);
+            this.cbZonas.Location = new System.Drawing.Point(20, 60);
             this.cbZonas.Width = 300;
+            this.cbZonas.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbZonas.SelectedIndexChanged += new System.EventHandler(this.cbZonas_SelectedIndexChanged);
             this.Controls.Add(this.cbZonas);
 
             // TableLayoutPanel
-            this.tableLayoutPanel.Location = new System.Drawing.Point(20, 60);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(20, 100);
             this.tableLayoutPanel.Size = new System.Drawing.Size(550, 400);
             this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.RowCount = 14;
+            this.tableLayoutPanel.RowCount = 16;
             this.tableLayoutPanel.AutoSize = true;
             this.tableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
 
@@ -83,7 +107,7 @@
             string[] etiquetas = {
                 "Zona", "Salario Básico", "Prestacional", "Prom. Comisiones", "Salario Total",
                 "Bono Cumpl. Ventas", "Bono Basik", "Bono Celulares", "Bono Bod 9-10", "Dulces Alejandro",
-                "Clientes Activos", "KPI Temporada", "Total Bonos", "Ganarian Total Salario"
+                "Clientes Activos", "KPI Temporada","BonoEspecial1", "BonoEspecial1", "Total Bonos", "Ganarian Total Salario"
             };
 
             // Crear arreglo de labels de resultado, ya instanciados
@@ -101,6 +125,8 @@
                 lblBonoDulces,
                 lblClientes,
                 lblKPI,
+                lblEspecial1,
+                lblEspecial2,
                 lblTotalBonos,
                 lblTotalGanado
             };

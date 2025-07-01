@@ -19,6 +19,28 @@ namespace Jaltech.App
         {
             InitializeComponent();
             _context = context;
+
+            // Estilo para botones principales
+            EstilizarBoton(btnPresupuestos, Color.FromArgb(0, 102, 204));
+            EstilizarBoton(btnSalir, Color.FromArgb(204, 0, 0));
+            EstilizarBoton(btnVistaPreviaZona, Color.FromArgb(0, 123, 255), true);
+
+            // Asigna el evento correctamente al botón real
+            btnVistaPreviaZona.Click += btnVistaPrevia_Click;
+
+            // Si hay DataGridView, aplica estilo
+            // dgvInicio.EnableHeadersVisualStyles = false;
+            // dgvInicio.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 51, 102);
+            // dgvInicio.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            // dgvInicio.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            // dgvInicio.DefaultCellStyle.Font = new Font("Segoe UI", 9);
+            // dgvInicio.RowTemplate.Height = 28;
+            // dgvInicio.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
+        }
+
+        private void EstilizarBoton(object btnVistaPreviaZona, Color color, bool v)
+        {
+            throw new NotImplementedException();
         }
 
         private void btnPresupuestos_Click(object sender, EventArgs e)
@@ -48,6 +70,14 @@ namespace Jaltech.App
 
         }
 
-       
+        // Método de utilidad para estilizar botones
+        private void EstilizarBoton(Button boton, Color fondo, bool bold = false)
+        {
+            boton.BackColor = fondo;
+            boton.FlatStyle = FlatStyle.Flat;
+            boton.FlatAppearance.BorderSize = 0;
+            boton.ForeColor = Color.White;
+            boton.Font = new Font("Segoe UI", 10, bold ? FontStyle.Bold : FontStyle.Regular);
+        }
     }
 }

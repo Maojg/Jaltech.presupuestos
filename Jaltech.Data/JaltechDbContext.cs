@@ -33,7 +33,10 @@ namespace Jaltech.Data
                 entity.Property(p => p.BonoCelulares).HasPrecision(18, 2);
                 entity.Property(p => p.BonoBod).HasPrecision(18, 2);
                 entity.Property(p => p.BonoDulces).HasPrecision(18, 2);
+                entity.Property(p => p.ClientesActivos).HasPrecision(18, 2);
                 entity.Property(p => p.KPIReguladores).HasPrecision(18, 2);
+                entity.Property(p => p.BonoEspecial1).HasPrecision(18, 2);
+                entity.Property(p => p.BonoEspecial2).HasPrecision(18, 2);
                 entity.Property(p => p.TotalBonosMes).HasPrecision(18, 2);
                 entity.Property(p => p.TotalSalario).HasPrecision(18, 2);
             });
